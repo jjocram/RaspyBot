@@ -2,13 +2,16 @@ import requests
 import telegram
 from telegram.ext import Updater, CommandHandler
 
-from os import environ
+from os import environ, system
 from sys import exit
 
 
 def get_ip(bot, update):
     ip = requests.get('http://ifconfig.me').text
     update.message.reply_text(ip)
+
+def get_temp(bot, update):
+    update.message.reply_text(system("vcgencmd measure_temp"))
 
 def main():
     if "BOT_TOKEN" not in environ:
@@ -22,6 +25,7 @@ def main():
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler('get_ip', get_ip))
+    dp.add_handler(CommandHandler('get_temp', get_temp))
 
     updater.start_polling()
     updater.idle()
