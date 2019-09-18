@@ -2,7 +2,7 @@ import requests
 import telegram
 from telegram.ext import Updater, CommandHandler
 
-from os import environ, system
+from os import environ, popen
 from sys import exit
 
 
@@ -11,7 +11,7 @@ def get_ip(bot, update):
     update.message.reply_text(ip)
 
 def get_temp(bot, update):
-    update.message.reply_text(system("vcgencmd measure_temp"))
+    update.message.reply_text(popen("vcgencmd measure_temp").read())
 
 def main():
     if "BOT_TOKEN" not in environ:
