@@ -13,6 +13,10 @@ def get_ip(bot, update):
 def get_temp(bot, update):
     update.message.reply_text(popen("vcgencmd measure_temp").read())
 
+
+def get_uptime(bot, update):
+    update.message.reply_text(popen("uptime").read())
+
 def main():
     if "BOT_TOKEN" not in environ:
         print("BOT_TOKEN not found in environ")
@@ -26,6 +30,7 @@ def main():
 
     dp.add_handler(CommandHandler('get_ip', get_ip))
     dp.add_handler(CommandHandler('get_temp', get_temp))
+    dp.add_handler(CommandHandler('uptime', get_uptime))
 
     updater.start_polling()
     updater.idle()
