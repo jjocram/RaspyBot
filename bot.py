@@ -20,7 +20,7 @@ def get_uptime(bot, update):
 def main():
     if "BOT_TOKEN" not in environ:
         print("BOT_TOKEN not found in environ")
-        exit(1)
+        exit(2)
 
     TOKEN = environ["BOT_TOKEN"]
     updater = Updater(TOKEN)
